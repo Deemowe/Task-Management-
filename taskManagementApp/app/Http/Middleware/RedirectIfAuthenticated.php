@@ -10,20 +10,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated
 {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                // Check if the authenticated user is an admin
-                if (Auth::user()->role === 'admin') {
-                    // Redirect admin users to the admin home page
-                    return redirect(RouteServiceProvider::ADMIN_HOME);
-                } else {
-                    // Redirect non-admin users to the default home page
-                    return redirect(RouteServiceProvider::HOME);
-                }
+                return redirect(RouteServiceProvider::HOME);
             }
         }
 

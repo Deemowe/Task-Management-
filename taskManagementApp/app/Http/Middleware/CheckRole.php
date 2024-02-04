@@ -17,8 +17,8 @@ class CheckRole
     public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!auth()->check() || !in_array(auth()->user()->role, $roles)) {
+            
             // Redirect the user to the home page if they don't have the required role.
-            // This is a simple way to handle unauthorized access.
             return redirect('/');
         }
 
