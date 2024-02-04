@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project; // Ensure you have this model at the top of your controller
+
 
 class ProjectManagementController extends Controller
 {
     // Method to handle the request to the /admin/projects URL
     public function index()
     {
-        // Returns the view located at resources/views/admin/projects.blade.php
-        // You can pass data to your view if needed, for example:
-        // return view('admin.projects', ['projects' => $projects]);
-        return view('admin.projects');
+        $projects = Project::all(); // Or use any other query to get the projects you need
+
+        // Pass the projects to your view
+        return view('admin.projects', ['projects' => $projects]);
     }
+
+
+    public function create()
+{
+    // Returns the view located at resources/views/admin/create.blade.php
+    return view('admin.create');
+}   
+
 }

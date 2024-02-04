@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/projects', [ProjectManagementController::class, 'index'])->name('admin.projects');
+    Route::get('/admin/projects/create', [ProjectManagementController::class, 'create'])->name('admin.projects.create');
+
+
 });
 
 
